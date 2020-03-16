@@ -24,7 +24,6 @@ reset:
   jsr lcd_instruction
 
   lda #"H"
-  ldb
   jsr print_char
   lda #"e"
   jsr print_char
