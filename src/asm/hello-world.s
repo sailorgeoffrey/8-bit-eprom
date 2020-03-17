@@ -10,10 +10,14 @@ RS = %00100000
   .org $8000
 
 reset:
+  ldx #$ff
+  txs
+
   lda #%11111111 ; set all pins on port B to output
   sta DDRB
   lda #%11100000 ; set top 3 pins on port A to output
   sta DDRA
+
   lda #%00111000 ; set 8-bit mode; 2-line display; 5x8 font
   jsr lcd_instruction
   lda #%00001110 ; display on; cursor on ; blink off
@@ -49,6 +53,9 @@ reset:
   jsr print_char
   lda #"!"
   jsr print_char
+
+loop:
+  jmp loop
 
 lcd_instruction:
   sta PORTB
